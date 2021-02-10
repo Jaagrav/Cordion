@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 
 import "./style/index.css";
 
+import ul from "../../../../assets/icons/unordered-list.png";
+import ol from "../../../../assets/icons/numbered-list.png";
+import code from "../../../../assets/icons/code-block.png";
 import {
   Editor as NoteEditor,
   EditorState,
@@ -214,9 +217,15 @@ function Editor({ match }) {
         </IconButton>
         <Button onMouseDown={onCodeClick}>Monospace</Button>
         <Button onMouseDown={onBlockQuoteClick}>Blockquote</Button>
-        <Button onMouseDown={onULClick}>UL</Button>
-        <Button onMouseDown={onOLClick}>OL</Button>
-        <Button onMouseDown={onCodeBlockClick}>Code Block</Button>
+        <Button onMouseDown={onULClick}>
+          <img src={ul} alt="UL" />
+        </Button>
+        <Button onMouseDown={onOLClick}>
+          <img src={ol} alt="OL" />
+        </Button>
+        <Button onMouseDown={onCodeBlockClick}>
+          <img src={code} alt="Code Block" />
+        </Button>
       </div>
       <div className="editor">
         <NoteEditor

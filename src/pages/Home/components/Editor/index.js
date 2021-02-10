@@ -51,7 +51,6 @@ function Editor({ match }) {
         .then((snap) => {
           if (snap?.val()?.title) {
             setTitle(snap.val().title);
-            document.title = `Cordion - ${snap.val().title}`;
           }
           if (snap?.val()?.editorData)
             setEditorState(
@@ -69,6 +68,8 @@ function Editor({ match }) {
     //   JSON.stringify(convertToRaw(editorState.getCurrentContent()))
     // );
     if (title.trim() === "") setTitle("Untitled");
+
+    document.title = `Cordion - ${title}`;
 
     const date = new Date();
     let month = [

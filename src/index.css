@@ -1,13 +1,58 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* @import "~@sweetalert2/theme-borderless/borderless.scss"; */
+
+@font-face {
+  font-family: "Google Sans";
+  src: url("./assets/fonts/GoogleSans/ProductSans-Regular.ttf");
+}
+@font-face {
+  font-family: "Google Sans";
+  src: url("./assets/fonts/GoogleSans/ProductSans-Thin.ttf");
+  font-weight: thin;
+}
+@font-face {
+  font-family: "Google Sans";
+  src: url("./assets/fonts/GoogleSans/ProductSans-Light.ttf");
+  font-weight: lighter;
+}
+@font-face {
+  font-family: "Google Sans";
+  src: url("./assets/fonts/GoogleSans/ProductSans-Bold.ttf");
+  font-weight: bold;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@font-face {
+  font-family: "Montserrat";
+  src: url("./assets/fonts/Montserrat/Montserrat-Regular.ttf");
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("./assets/fonts/Montserrat/Montserrat-Thin.ttf");
+  font-weight: thin;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("./assets/fonts/Montserrat/Montserrat-Light.ttf");
+  font-weight: lighter;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("./assets/fonts/Montserrat/Montserrat-Bold.ttf");
+  font-weight: bold;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+*::selection {
+  background: #000;
+  color: #fff;
+  /* border-radius: 4px; */
 }

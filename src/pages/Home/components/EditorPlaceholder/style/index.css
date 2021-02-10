@@ -1,0 +1,13 @@
+.editor-placeholder {
+  border-left: 2px solid #000;
+}
+
+.cordion-logo {
+  height: 10pc;
+}
+
+.description {
+  text-align: left;
+  font-size: 24px;
+  padding: 0 34px;
+}

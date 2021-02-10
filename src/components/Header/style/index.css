@@ -1,0 +1,43 @@
+.header {
+  height: 100vh;
+  width: 70px;
+  background-color: #000;
+  padding: 10px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.branding-logo {
+  height: 50px;
+  width: 50px;
+}
+
+.branding-name {
+  transform: rotate(-180deg);
+  font-family: Montserrat, sans-serif;
+  color: #fff;
+  writing-mode: vertical-lr;
+  font-size: 28px;
+}
+
+@media (max-width: 576px) {
+  .header {
+    width: 50px;
+  }
+
+  .branding-logo {
+    height: 35px;
+    width: 35px;
+  }
+
+  .branding-name {
+    font-size: 17px;
+  }
+
+  .MuiAvatar-root.MuiAvatar-circle.MuiAvatar-colorDefault {
+    height: 30px;
+    width: 30px;
+  }
+}

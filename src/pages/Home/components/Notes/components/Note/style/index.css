@@ -1,0 +1,51 @@
+.Note {
+  cursor: pointer;
+  padding: 20px;
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: 1fr auto;
+}
+
+/* .Note .note-info {
+  max-width: 60%;
+} */
+
+.Note:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.Note.selected {
+  cursor: default;
+  background-color: #000;
+}
+
+.Note .note-info * {
+  color: #000;
+}
+
+.Note.selected .note-info * {
+  color: #fff;
+}
+
+.Note .note-title {
+  font-size: 22px;
+  margin-bottom: 4px;
+  font-weight: bold;
+  /* text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap; */
+}
+
+.Note .icon {
+  display: none;
+  cursor: pointer;
+}
+
+.Note.selected .icon {
+  display: block;
+}
+
+.swal2-styled.swal2-cancel {
+  border: 2px solid black !important;
+  color: #000 !important;
+}

@@ -1,0 +1,76 @@
+.Notes {
+  height: 100vh;
+  width: 100%;
+  text-align: right;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.add-btn {
+  cursor: pointer;
+  height: 45px;
+  width: 45px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000;
+  border: 2px solid #000;
+  border-radius: 8px;
+  position: absolute;
+  bottom: 0;
+  margin: 18px;
+  transform: translateX(-180%);
+}
+
+.add-btn:hover {
+  background-color: #000000b0;
+}
+
+.add-btn:active {
+  background-color: #fff;
+}
+
+.add-btn:active * {
+  color: #000 !important;
+}
+
+.Notes .body {
+  text-align: left;
+  height: 100%;
+  padding: 14px 0;
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
+.search-box {
+  padding: 0 14px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  margin: 0 14px;
+  border: 2px solid #000;
+  border-radius: 8px;
+}
+
+.search-input {
+  height: 50px;
+  width: 100%;
+  flex: 1;
+  outline: none;
+  border: none;
+  font-size: 18px;
+  border-right: 2px solid #000;
+}
+
+.search-icon {
+  cursor: pointer;
+  margin: auto auto auto 14px;
+}
+
+.notes-list {
+  margin: 14px 0 0 0;
+  overflow: auto;
+}
+
+.no-notes {
+  padding: 0 14px;
+}

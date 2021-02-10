@@ -1,0 +1,89 @@
+.AuthDialog {
+  width: 80%;
+  max-width: 50pc;
+  background-color: #000;
+  border-radius: 8px;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  overflow: hidden;
+}
+
+.illustration {
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 0;
+}
+
+.auth_illustration {
+  width: 80%;
+}
+
+.auth-info {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+}
+
+.exit-btn {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.info {
+  flex: 1;
+  padding: 0 30px;
+}
+.title {
+  font-size: 54px;
+}
+.details {
+  margin: 14px 0;
+  font-size: 27px;
+}
+.login-btn {
+  font-size: 20px;
+  padding: 14px;
+  border-radius: 4px;
+  border: 2px solid #ffffff;
+  text-align: center;
+  margin-top: 60px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.login-btn:hover {
+  background-color: #ffffff44;
+}
+
+.login-btn:active {
+  background-color: #ffffff;
+  color: #000;
+}
+
+@media (max-width: 576px) {
+  .AuthDialog {
+    grid-template-columns: none;
+    grid-template-rows: 50% 50%;
+  }
+
+  .illustration {
+    padding: 30px;
+  }
+
+  .title {
+    font-size: 34px;
+  }
+
+  .details {
+    font-size: 17px;
+  }
+
+  .login-btn {
+    padding: 8px;
+    font-size: 14px;
+    margin: 30px 0 40px 0;
+    border: 1px solid #ffffff;
+  }
+}

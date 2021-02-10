@@ -8,13 +8,15 @@ import { AddRounded, Search } from "@material-ui/icons";
 import { db, auth } from "../../../../firebase";
 
 import Note from "./components/Note";
+import AuthDialog from "../../../../components/AuthDialog";
 
 function Notes() {
   const history = useHistory();
   const [uid, setUID] = useState(""),
     [notes, setNotes] = useState([]),
     [searchText, setSearchText] = useState(""),
-    [showAddBtn, setShowAddBtn] = useState(true);
+    [showAddBtn, setShowAddBtn] = useState(true),
+    [showAuthDialog, setShowAuthDialog] = useState(false);
   useEffect(() => {
     auth.onAuthStateChanged((currentUser) => {
       setUID(currentUser.uid);
@@ -52,50 +54,55 @@ function Notes() {
   } ${date.getFullYear()}`;
 
   const createNewNote = () => {
-    db.child(uid)
-      .push()
-      .then((snap) => {
-        db.child(uid).child(snap.key).set({
-          title: "Untitled",
-          editorData: "",
-          lastEdited: lastEdited,
+    if (uid)
+      db.child(uid)
+        .push()
+        .then((snap) => {
+          db.child(uid).child(snap.key).set({
+            title: "Untitled",
+            editorData: "",
+            lastEdited: lastEdited,
+          });
         });
-      });
+    else setShowAuthDialog(true);
   };
 
   return (
-    <div className="Notes">
-      <div className="body">
-        <div className="search-box">
-          <input
-            type="text"
-            className="search-input"
-            placeholder="Search"
-            value={searchText}
-            onChange={(e) => setSearchText(e.target.value)}
-          />
-          <Search className="search-icon" />
+    <>
+      <div className="Notes">
+        <div className="body">
+          <div className="search-box">
+            <input
+              type="text"
+              className="search-input"
+              placeholder="Search"
+              value={searchText}
+              onChange={(e) => setSearchText(e.target.value)}
+            />
+            <Search className="search-icon" />
+          </div>
+          <div className="notes-list">
+            {notes.map((note) => (
+              <Note path={`/${note}`} key={note} searchFilter={searchText} />
+            ))}
+            {notes.length === 0 && (
+              <div className="no-notes">
+                Looks like you don't have any notes, simply press on the add
+                button to create a new file!
+              </div>
+            )}
+          </div>
         </div>
-        <div className="notes-list">
-          {notes.map((note) => (
-            <Note path={`/${note}`} key={note} searchFilter={searchText} />
-          ))}
-          {notes.length === 0 && (
-            <div className="no-notes">
-              Looks like you don't have any notes, simply press on the add
-              button to create a new file!
-            </div>
-          )}
+        <div
+          className="add-btn"
+          onClick={createNewNote}
+          style={{ display: showAddBtn ? "inline-flex" : "none" }}
+        >
+          <AddRounded className="icon" />
         </div>
       </div>
-      <div
-        className="add-btn"
-        onClick={createNewNote}
-        style={{ display: showAddBtn ? "inline-flex" : "none" }}
-      >
-        <AddRounded className="icon" />
-      </div>
-    </div>
+      <AuthDialog open={showAuthDialog} setShowAuthDialog={setShowAuthDialog} />
+    </>
   );
 }
 

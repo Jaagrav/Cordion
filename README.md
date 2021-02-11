@@ -14,6 +14,8 @@ You can edit your projects and Cordion saves everything automatically for you!
 - Auto saves your files
 - Responsive, access your files from any device!
 - Google Authorization. Sign in with your Google Account.
+- Share your files with your friends and save others files in just one click!
+- Drag and Drop to organize your files.
 
 ## Dependencies
 

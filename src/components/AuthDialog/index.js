@@ -48,7 +48,6 @@ function AuthDialog({ open, setShowAuthDialog }) {
         setShowAuthDialog(false);
       } else {
         setIsLoggedIn(false);
-        if (window.location.pathname.substring(1)) window.open("/", "_self");
       }
     });
   }, []);

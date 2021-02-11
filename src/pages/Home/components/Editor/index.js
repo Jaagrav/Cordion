@@ -18,7 +18,10 @@ import {
   FormatUnderlinedRounded,
   FormatItalicRounded,
   StrikethroughS,
+  FormatListNumbered,
+  FormatListBulleted,
   Share,
+  Code,
 } from "@material-ui/icons";
 
 import { db, auth } from "../../../../firebase";
@@ -253,9 +256,15 @@ function Editor({ match }) {
           </IconButton>
           <Button onMouseDown={onCodeClick}>Monospace</Button>
           <Button onMouseDown={onBlockQuoteClick}>Blockquote</Button>
-          <Button onMouseDown={onULClick}>UL</Button>
-          <Button onMouseDown={onOLClick}>OL</Button>
-          <Button onMouseDown={onCodeBlockClick}>Code Block</Button>
+          <Button onMouseDown={onULClick}>
+            <FormatListBulleted />
+          </Button>
+          <Button onMouseDown={onOLClick}>
+            <FormatListNumbered />
+          </Button>
+          <Button onMouseDown={onCodeBlockClick}>
+            <Code />
+          </Button>
         </div>
         <div className="editor">
           <NoteEditor

@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 
 import "./style/index.css";
 
-import ul from "../../../../assets/icons/unordered-list.png";
-import ol from "../../../../assets/icons/numbered-list.png";
-import code from "../../../../assets/icons/code-block.png";
+import CodeIcon from "@material-ui/icons/Code";
+import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
+import FormatListNumberedIcon from "@material-ui/icons/FormatListNumbered";
 import {
   Editor as NoteEditor,
   EditorState,
@@ -218,13 +218,13 @@ function Editor({ match }) {
         <Button onMouseDown={onCodeClick}>Monospace</Button>
         <Button onMouseDown={onBlockQuoteClick}>Blockquote</Button>
         <Button onMouseDown={onULClick}>
-          <img src={ul} alt="UL" />
+          <FormatListBulletedIcon />
         </Button>
         <Button onMouseDown={onOLClick}>
-          <img src={ol} alt="OL" />
+          <FormatListNumberedIcon />
         </Button>
         <Button onMouseDown={onCodeBlockClick}>
-          <img src={code} alt="Code Block" />
+          <CodeIcon />
         </Button>
       </div>
       <div className="editor">

@@ -1,0 +1,38 @@
+.NoteViewer {
+  height: 100vh;
+  width: 100%;
+  border-left: 2px solid #000;
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+}
+
+.file-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px;
+}
+
+.display-title {
+  font-weight: bold;
+  font-size: 48px;
+}
+
+.file-author-info {
+  padding: 0 16px;
+  font-size: 18px;
+}
+
+.file-editor {
+  height: 100%;
+  width: 100%;
+  margin: 14px 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+@media (max-width: 576px) {
+  .display-title {
+    font-size: 2em;
+  }
+}

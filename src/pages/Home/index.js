@@ -1,10 +1,11 @@
 import React, { useEffect, useRef } from "react";
 
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 import Notes from "./components/Notes";
 import Editor from "./components/Editor";
 import EditorPlaceholder from "./components/EditorPlaceholder";
+import NoteViewer from "./components/NoteViewer";
 
 function Home({ match }) {
   const homepageRef = useRef();
@@ -30,8 +31,11 @@ function Home({ match }) {
   return (
     <div ref={homepageRef} className="home-page">
       <Notes />
-      <Route exact path="/" component={EditorPlaceholder} />
-      <Route exact path="/:cordionID" component={Editor} />
+      <Switch>
+        <Route exact path="/" component={EditorPlaceholder} />
+        <Route exact path="/view/:uid/:cordionID" component={NoteViewer} />
+        <Route exact path="/:cordionID" component={Editor} />
+      </Switch>
     </div>
   );
 }

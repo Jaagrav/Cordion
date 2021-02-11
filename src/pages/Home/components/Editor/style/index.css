@@ -7,13 +7,23 @@
   grid-template-rows: auto auto 1fr;
 }
 
+.editor-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px;
+}
+
+.editor-title * {
+  margin: auto;
+}
+
 .input-title {
   font-size: 48px;
   font-weight: 600;
   outline: 0;
   border: 0;
   width: 100%;
-  padding: 10px 14px;
 }
 
 .editor-edit-btns {

@@ -3,9 +3,8 @@ import React, { useState, useEffect } from "react";
 import "./style/index.css";
 
 import CodeIcon from "@material-ui/icons/Code";
-import FormatListNumberedIcon from "@material-ui/icons/FormatListBulleted";
-import FormatListBulletedIcon from "@material-ui/icons/FormatListNumbered";
-
+import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
+import FormatListNumberedIcon from "@material-ui/icons/FormatListNumbered";
 import {
   Editor as NoteEditor,
   EditorState,
@@ -221,61 +220,56 @@ function Editor({ match }) {
   };
 
   return (
-    <>
-      <div className="Editor">
-        <div className="editor-title">
-          <input
-            type="text"
-            className="input-title"
-            placeholder="Title Here"
-            value={title}
-            onChange={(e) => {
-              setTitle(e.target.value);
-            }}
-          />
-          <IconButton title="Copy shareable link" onClick={copyShareableLink}>
-            <Share />
-          </IconButton>
-        </div>
-        <div className="editor-edit-btns">
-          <ButtonGroup>
-            <Button onMouseDown={(e) => onHeaderClick(e, "one")}>H1</Button>
-            <Button onMouseDown={(e) => onHeaderClick(e, "two")}>H2</Button>
-            <Button onMouseDown={(e) => onHeaderClick(e, "three")}>H3</Button>
-          </ButtonGroup>
-          <IconButton onMouseDown={onBoldClick}>
-            <FormatBoldRounded />
-          </IconButton>
-          <IconButton onMouseDown={onItalicClick}>
-            <FormatItalicRounded />
-          </IconButton>
-          <IconButton onMouseDown={onUnderlineClick}>
-            <FormatUnderlinedRounded />
-          </IconButton>
-          <IconButton onMouseDown={onStrikeClick}>
-            <StrikethroughS />
-          </IconButton>
-          <Button onMouseDown={onCodeClick}>Monospace</Button>
-          <Button onMouseDown={onBlockQuoteClick}>Blockquote</Button>
-          <Button onMouseDown={onULClick}>
-            <FormatListBulletedIcon />
-          </Button>
-          <Button onMouseDown={onOLClick}>
-            <FormatListNumberedIcon />
-          </Button>
-          <Button onMouseDown={onCodeBlockClick}>
-            <CodeIcon />
-          </Button>
-        </div>
-        <div className="editor">
-          <NoteEditor
-            editorState={editorState}
-            onChange={setEditorState}
-            handleKeyCommand={handleKeyCommand}
-            customStyleMap={styleMap}
-            placeholder="Type your notes in here..."
-          />
-        </div>
+    <div className="Editor">
+      <div className="editor-title">
+        <input
+          type="text"
+          className="input-title"
+          placeholder="Title Here"
+          value={title}
+          onChange={(e) => {
+            setTitle(e.target.value);
+          }}
+        />
+      </div>
+      <div className="editor-edit-btns">
+        <ButtonGroup>
+          <Button onMouseDown={(e) => onHeaderClick(e, "one")}>H1</Button>
+          <Button onMouseDown={(e) => onHeaderClick(e, "two")}>H2</Button>
+          <Button onMouseDown={(e) => onHeaderClick(e, "three")}>H3</Button>
+        </ButtonGroup>
+        <IconButton onMouseDown={onBoldClick}>
+          <FormatBoldRounded />
+        </IconButton>
+        <IconButton onMouseDown={onItalicClick}>
+          <FormatItalicRounded />
+        </IconButton>
+        <IconButton onMouseDown={onUnderlineClick}>
+          <FormatUnderlinedRounded />
+        </IconButton>
+        <IconButton onMouseDown={onStrikeClick}>
+          <StrikethroughS />
+        </IconButton>
+        <Button onMouseDown={onCodeClick}>Monospace</Button>
+        <Button onMouseDown={onBlockQuoteClick}>Blockquote</Button>
+        <Button onMouseDown={onULClick}>
+          <FormatListBulletedIcon />
+        </Button>
+        <Button onMouseDown={onOLClick}>
+          <FormatListNumberedIcon />
+        </Button>
+        <Button onMouseDown={onCodeBlockClick}>
+          <CodeIcon />
+        </Button>
+      </div>
+      <div className="editor">
+        <NoteEditor
+          editorState={editorState}
+          onChange={setEditorState}
+          handleKeyCommand={handleKeyCommand}
+          customStyleMap={styleMap}
+          placeholder="Type your notes in here..."
+        />
       </div>
       <Snackbar
         open={showSnackbar}
@@ -287,7 +281,7 @@ function Editor({ match }) {
           Shareable Link has been copied successfully!
         </Alert>
       </Snackbar>
-    </>
+    </div>
   );
 }
 

@@ -64,6 +64,10 @@ blockquote {
   padding: 7px 0;
 }
 
+.public-DraftStyleDefault-pre pre * {
+  font-family: monospace !important;
+}
+
 @media (max-width: 576px) {
   .DraftEditor-root {
     font-size: 18px;

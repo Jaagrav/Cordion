@@ -8,9 +8,10 @@ import { Delete } from "@material-ui/icons";
 import { db, auth } from "../../../../../../firebase";
 
 import Swal from "sweetalert2";
-// import "sweetalert2/src/sweetalert2.scss";
 
-function Note({ path, searchFilter }) {
+import { Draggable } from "react-beautiful-dnd";
+
+function Note({ path, searchFilter, index, notes, setNotes }) {
   const [uid, setUID] = useState(""),
     [selected, setSelected] = useState(false),
     [title, setTitle] = useState(""),
@@ -23,7 +24,6 @@ function Note({ path, searchFilter }) {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
-      // icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#000",
       cancelButtonColor: "#fff",
@@ -33,8 +33,13 @@ function Note({ path, searchFilter }) {
         Swal.fire("Deleted!", "Your file has been deleted.", "success");
 
         db.child(uid).child(path.substring(1)).set(null);
+
+        let tempNotesArray = [...notes];
+        tempNotesArray.splice(index, 1);
+
+        setNotes(tempNotesArray);
+
         history.replace("/");
-        setDeleted(true);
       }
     });
   };
@@ -60,45 +65,60 @@ function Note({ path, searchFilter }) {
   }, []);
 
   useEffect(() => {
-    // console.log(
-    //   searchFilter,
-    //   title.toLowerCase().includes(searchFilter.toLowerCase())
-    // );
     setShow(title.toLowerCase().includes(searchFilter.toLowerCase()));
   }, [searchFilter]);
 
+  const getItemStyle = (isDragging, draggablePropsStyle) => ({
+    boxShadow: isDragging ? "0 0 14px rgba(0, 0, 0, 0.1)" : "none",
+    ...draggablePropsStyle,
+  });
+
   return (
-    <div>
-      {selected ? (
+    <Draggable draggableId={path} index={index}>
+      {(provided, snapshot) => (
         <div
-          className={selected ? "Note selected" : "Note"}
-          style={{ display: show && !deleted ? "grid" : "none" }}
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+          style={getItemStyle(
+            snapshot.isDragging,
+            provided.draggableProps.style
+          )}
         >
-          <div className="note-info">
-            <div className="note-title">{title}</div>
-            <div className="note-lastEdited">Last Edited: {lastEdited}</div>
-          </div>
-          <div className="icon" onClick={deleteNote}>
-            <Delete />
-          </div>
+          {selected ? (
+            <div
+              className={selected ? "Note selected" : "Note"}
+              style={{ display: show && !deleted ? "grid" : "none" }}
+            >
+              <div className="note-info">
+                <div className="note-title">{title}</div>
+                <div className="note-lastEdited">Last Edited: {lastEdited}</div>
+              </div>
+              <div className="icon" onClick={deleteNote}>
+                <Delete />
+              </div>
+            </div>
+          ) : (
+            <Link to={path}>
+              <div
+                className={selected ? "Note selected" : "Note"}
+                style={{ display: show && !deleted ? "grid" : "none" }}
+              >
+                <div className="note-info">
+                  <div className="note-title">{title}</div>
+                  <div className="note-lastEdited">
+                    Last Edited: {lastEdited}
+                  </div>
+                </div>
+                <div className="icon">
+                  <Delete />
+                </div>
+              </div>
+            </Link>
+          )}
         </div>
-      ) : (
-        <Link to={path}>
-          <div
-            className={selected ? "Note selected" : "Note"}
-            style={{ display: show && !deleted ? "grid" : "none" }}
-          >
-            <div className="note-info">
-              <div className="note-title">{title}</div>
-              <div className="note-lastEdited">Last Edited: {lastEdited}</div>
-            </div>
-            <div className="icon">
-              <Delete />
-            </div>
-          </div>
-        </Link>
       )}
-    </div>
+    </Draggable>
   );
 }
 

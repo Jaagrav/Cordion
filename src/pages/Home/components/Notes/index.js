@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useHistory } from "react-router-dom";
 
 import "./style/index.css";
@@ -10,6 +10,8 @@ import { db, auth } from "../../../../firebase";
 import Note from "./components/Note";
 import AuthDialog from "../../../../components/AuthDialog";
 
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
+
 function Notes() {
   const history = useHistory();
   const [uid, setUID] = useState(""),
@@ -17,12 +19,39 @@ function Notes() {
     [searchText, setSearchText] = useState(""),
     [showAddBtn, setShowAddBtn] = useState(true),
     [showAuthDialog, setShowAuthDialog] = useState(false);
+
   useEffect(() => {
     auth.onAuthStateChanged((currentUser) => {
-      setUID(currentUser.uid);
-      db.child(currentUser.uid).on("child_added", (snap) => {
-        setNotes((prevNotes) => [...prevNotes, snap.key]);
-      });
+      if (currentUser?.uid) {
+        db.child(currentUser.uid)
+          .once("value")
+          .then((userData) => {
+            db.child(currentUser.uid).on("value", (snap) => {
+              let values = snap.val();
+              let tempArr = [];
+
+              if (values?.order) {
+                tempArr = [...values.order];
+                for (let note in values) {
+                  if (
+                    note !== "order" &&
+                    (!values.order.includes(note) || !tempArr.includes(note))
+                  )
+                    tempArr.push(note);
+                }
+                setNotes(tempArr);
+              }
+
+              if (!values?.order) {
+                for (let note in values) {
+                  if (note !== "order") tempArr.push(note);
+                }
+                setNotes(tempArr);
+              }
+            });
+          });
+        setUID(currentUser.uid);
+      }
     });
   }, []);
 
@@ -31,6 +60,12 @@ function Notes() {
       setShowAddBtn(false);
     else setShowAddBtn(true);
   }, [window.location.href, window.innerWidth]);
+
+  useEffect(() => {
+    if (uid && notes.length) {
+      db.child(uid).child("order").set(notes);
+    }
+  }, [notes]);
 
   const date = new Date();
   let month = [
@@ -67,6 +102,16 @@ function Notes() {
     else setShowAuthDialog(true);
   };
 
+  const reorder = (e) => {
+    if (e.source && e.destination) {
+      let tempNotesArray = [...notes];
+      const temp = tempNotesArray[e.source.index];
+      tempNotesArray.splice(e.source.index, 1);
+      tempNotesArray.splice(e.destination.index, 0, temp);
+      setNotes(tempNotesArray);
+    }
+  };
+
   return (
     <>
       <div className="Notes">
@@ -82,9 +127,25 @@ function Notes() {
             <Search className="search-icon" />
           </div>
           <div className="notes-list">
-            {notes.map((note) => (
-              <Note path={`/${note}`} key={note} searchFilter={searchText} />
-            ))}
+            <DragDropContext onDragEnd={reorder}>
+              <Droppable droppableId="notes">
+                {(provided) => (
+                  <div {...provided.droppableProps} ref={provided.innerRef}>
+                    {notes.map((note, index) => (
+                      <Note
+                        path={`/${note}`}
+                        key={note}
+                        searchFilter={searchText}
+                        index={index}
+                        notes={notes}
+                        setNotes={setNotes}
+                      />
+                    ))}
+                    {provided.placeholder}
+                  </div>
+                )}
+              </Droppable>
+            </DragDropContext>
             {notes.length === 0 && (
               <div className="no-notes">
                 Looks like you don't have any notes, simply press on the add

@@ -55,7 +55,8 @@ function Editor({ match }) {
   const styleMap = {
     CODE: {
       backgroundColor: "rgba(0, 0, 0, 0.1)",
-      fontFamily: "monospace",
+      fontFamily: "monospace !important",
+      // fontSize: 10,
       borderRadius: 4,
     },
     STRIKE: {

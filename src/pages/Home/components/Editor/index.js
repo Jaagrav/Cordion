@@ -18,7 +18,15 @@ import {
   FormatUnderlinedRounded,
   FormatItalicRounded,
   StrikethroughS,
+  FormatListNumbered,
+  FormatListBulleted,
+  FormatQuote,
+  Highlight,
   Share,
+  Code,
+  FormatAlignCenter,
+  FormatAlignLeft,
+  FormatAlignRight,
 } from "@material-ui/icons";
 
 import { db, auth } from "../../../../firebase";
@@ -240,6 +248,15 @@ function Editor({ match }) {
             <Button onMouseDown={(e) => onHeaderClick(e, "two")}>H2</Button>
             <Button onMouseDown={(e) => onHeaderClick(e, "three")}>H3</Button>
           </ButtonGroup>
+          {/* <IconButton>
+            <FormatAlignLeft />
+          </IconButton>
+          <IconButton>
+            <FormatAlignCenter />
+          </IconButton>
+          <IconButton>
+            <FormatAlignRight />
+          </IconButton> */}
           <IconButton onMouseDown={onBoldClick}>
             <FormatBoldRounded />
           </IconButton>
@@ -252,11 +269,21 @@ function Editor({ match }) {
           <IconButton onMouseDown={onStrikeClick}>
             <StrikethroughS />
           </IconButton>
-          <Button onMouseDown={onCodeClick}>Monospace</Button>
-          <Button onMouseDown={onBlockQuoteClick}>Blockquote</Button>
-          <Button onMouseDown={onULClick}>UL</Button>
-          <Button onMouseDown={onOLClick}>OL</Button>
-          <Button onMouseDown={onCodeBlockClick}>Code Block</Button>
+          <IconButton onMouseDown={onCodeClick}>
+            <Highlight />
+          </IconButton>
+          <IconButton onMouseDown={onBlockQuoteClick}>
+            <FormatQuote />
+          </IconButton>
+          <IconButton onMouseDown={onULClick}>
+            <FormatListBulleted />
+          </IconButton>
+          <IconButton onMouseDown={onOLClick}>
+            <FormatListNumbered />
+          </IconButton>
+          <IconButton onMouseDown={onCodeBlockClick}>
+            <Code />
+          </IconButton>
         </div>
         <div className="editor">
           <NoteEditor
